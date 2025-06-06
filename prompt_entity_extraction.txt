@@ -1,0 +1,28 @@
+We perform knowledge graph-based path reasoning for explainable recommender systems. At this point, we are wondering if there are other entities that the current KG couldn't capture, and thus trying to extract them through LLM.
+This game ({app_name}) already has the following known gameplay-related categories:
+[ {origin_category} ]
+
+Now we want to extract only 0–2 additional categories that may have been missed in the original entity set, but are:
+- Similar in level and type to the existing ones
+- Frequently and clearly mentioned in the review
+- Directly related to how the game is played
+
+If no such category clearly appears, it's fine to skip extraction.
+
+**Strict rules:**
+- Extract only the new categories that are not present in the known categories.
+- Each extracted category must represent a distinct gameplay-related **mode, mechanic, or player interaction type**.
+- Categories should be suitable as tags on a digital game store like Steam (e.g., "Co-op", "Turn-Based Combat", "Platformer").
+- Do NOT extract emotional, visual, story-related, vague, or evaluative terms (e.g., "fun", "challenging", "immersive").
+- Extract ONLY the categories that are **explicitly mentioned in the review text**. Do NOT infer or hallucinate.
+
+**Output format:**
+Return the result strictly in the following one-line JSON format:
+
+{{
+  "category": ["...", "..."]
+}}
+
+--- REVIEW START ---
+{review_text}
+--- REVIEW END ---
